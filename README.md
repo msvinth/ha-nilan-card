@@ -71,7 +71,7 @@ entities:
   fan_level: select.987350057755_remote_lscontrol_dk_fan_level
 ```
 
-See [docs/options.md](docs/options.md) for the full option reference (also rendered in the visual editor).
+All options are exposed in the visual editor with inline labels and helpers — start there and only hand-edit YAML if you need something the UI doesn't cover.
 
 ## Development
 
