@@ -514,11 +514,17 @@ export class NilanHmiCard extends LitElement {
     const ents = this._config!.entities ?? {};
     let entityId: string | undefined;
     let onStates: string[] | undefined;
+    let offStates: string[] | undefined = mapping?.off_states;
 
     switch (iconId) {
       case 'compressor':
-        entityId = mapping?.entity ?? ents.heatpump;
+        // Compressor icon mirrors the CTS602 HMI: shown whenever the
+        // controller status is in any compressor-utilising mode (i.e. not
+        // standby/off). Default to the `status` entity and invert via
+        // off_states so we don't have to enumerate every active state code.
+        entityId = mapping?.entity ?? ents.status ?? ents.heatpump;
         onStates = mapping?.on_states;
+        offStates = offStates ?? ['state_0', 'state_1', 'state_4', 'off', 'standby', 'stopped', 'idle', 'unavailable', 'unknown'];
         break;
       case 'cool':
         entityId = mapping?.entity ?? ents.heatpump_operation_state;
@@ -560,6 +566,9 @@ export class NilanHmiCard extends LitElement {
       const climate = entity(this.hass, entityId);
       const action = climate?.attributes?.hvac_action ?? climate?.state;
       active = onStates?.includes(String(action)) ?? false;
+    } else if (offStates && entityId) {
+      const st = this.hass?.states?.[entityId]?.state;
+      active = st !== undefined && !offStates.includes(String(st));
     } else {
       active = isOn(this.hass, entityId, onStates);
     }

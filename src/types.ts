@@ -40,6 +40,7 @@ export interface SlotConfig {
 export interface OperationIconMapping {
     entity?: string;
     on_states?: string[];
+    off_states?: string[];
     attribute?: string;
     icon?: string;
     color?: string;

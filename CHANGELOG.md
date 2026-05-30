@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.3.1 - 2026-05-30
+
+- Compressor icon: default mapping now follows the CTS602 HMI — driven by `status` and hidden only when in standby/off (`state_0`, `state_1`, `state_4`, etc.).
+- New `off_states` option on `operation_icons.mapping.<icon>` for inverse activation matching.
+
 ## 0.3.0 - 2026-05-30
 
 - Card picker: render HMI background image as preview thumbnail in Home Assistant's "Add card" dialog.
