@@ -472,7 +472,7 @@ export class NilanHmiCard extends LitElement {
         onStates = mapping?.on_states ?? ['heat', 'heating', 'auto'];
         break;
       case 'hotwater':
-        entityId = mapping?.entity ?? ents.heatpump_operation_state;
+        entityId = mapping?.entity ?? ents.status;
         onStates = mapping?.on_states ?? ['hot_water', 'state_2', 'state_3'];
         break;
       case 'defrost':
