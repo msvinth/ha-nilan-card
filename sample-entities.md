@@ -4,8 +4,8 @@ Here's the complete entity reference for the LS Control ventilation/heat pump un
 
 ## Sensors – Temperatures
 
-| Entity ID                                                              | Name                           | Value    | Description                                              |
-| ---------------------------------------------------------------------- | ------------------------------ | -------- | -------------------------------------------------------- |
+| Entity ID                                   | Name                           | Value    | Description                                              |
+| ------------------------------------------- | ------------------------------ | -------- | -------------------------------------------------------- |
 | sensor.nilan_temperature_supply_air         | Temperature Supply air         | 25.96 °C | Air temperature being supplied into the house            |
 | sensor.nilan_temperature_extract_air        | Temperature Extract air        | 26.25 °C | Air temperature being extracted from the house           |
 | sensor.nilan_temperature_outside_air        | Temperature Outside air        | 19.96 °C | Outdoor air temperature measured by the unit             |
@@ -23,8 +23,8 @@ Here's the complete entity reference for the LS Control ventilation/heat pump un
 
 ## Sensors – Performance & Status
 
-| Entity ID                                                             | Name                          | Value    | Description                                                       |
-| --------------------------------------------------------------------- | ----------------------------- | -------- | ----------------------------------------------------------------- |
+| Entity ID                                  | Name                          | Value    | Description                                                       |
+| ------------------------------------------ | ----------------------------- | -------- | ----------------------------------------------------------------- |
 | sensor.nilan_efficiency                    | Efficiency                    | 95.36 %  | Heat recovery efficiency of the ventilation unit                  |
 | sensor.nilan_humidity                      | Humidity                      | 36.08 %  | Indoor relative humidity                                          |
 | sensor.nilan_fan_level_supply              | Fan Level Supply              | 2        | Current supply fan speed level                                    |
@@ -39,22 +39,22 @@ Here's the complete entity reference for the LS Control ventilation/heat pump un
 
 ## Binary Sensors
 
-| Entity ID                                                               | Name                     | Value | Description                                                     |
-| ----------------------------------------------------------------------- | ------------------------ | ----- | --------------------------------------------------------------- |
+| Entity ID                                    | Name                     | Value | Description                                                     |
+| -------------------------------------------- | ------------------------ | ----- | --------------------------------------------------------------- |
 | binary_sensor.nilan_bypass                   | Bypass                   | off   | Whether the heat-exchanger bypass valve is open (summer bypass) |
 | binary_sensor.nilan_heatpump                 | Heatpump                 | on    | Whether the heat pump compressor is running                     |
 | binary_sensor.nilan_heatpump_heating_element | Heatpump Heating Element | off   | Whether the auxiliary electric heating element is active        |
 
 ## Climate (HVAC Control)
 
-| Entity ID                                            | Name        | Value                                  | Description                                                                                                                                                               |
-| ---------------------------------------------------- | ----------- | -------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Entity ID                 | Name        | Value                                  | Description                                                                                                                                                               |
+| ------------------------- | ----------- | -------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | climate.nilan_ventilation | Ventilation | heat (target: 22 °C, current: 26.2 °C) | Main ventilation/climate control. HVAC modes: auto, cool, heat. Fan modes: off, low, middle, medium, high. Current fan: middle. Current action: fan. Temp range: 10–30 °C |
 
 ## Controls – Select (dropdowns)
 
-| Entity ID                                                    | Name                 | Value     | Description                                                               |
-| ------------------------------------------------------------ | -------------------- | --------- | ------------------------------------------------------------------------- |
+| Entity ID                         | Name                 | Value     | Description                                                               |
+| --------------------------------- | -------------------- | --------- | ------------------------------------------------------------------------- |
 | select.nilan_fan_level            | Fan level            | 2         | Manual fan speed level selection                                          |
 | select.nilan_antilegionella       | Antilegionella       | off       | Periodic hot water tank heating to kill legionella bacteria               |
 | select.nilan_cooling_priority     | Cooling Priority     | hot_water | What the heat pump prioritises in cooling mode (hot water vs ventilation) |
@@ -62,8 +62,8 @@ Here's the complete entity reference for the LS Control ventilation/heat pump un
 
 ## Controls – Number (setpoints)
 
-| Entity ID                                                                 | Name                              | Value   | Description                                     |
-| ------------------------------------------------------------------------- | --------------------------------- | ------- | ----------------------------------------------- |
+| Entity ID                                      | Name                              | Value   | Description                                     |
+| ---------------------------------------------- | --------------------------------- | ------- | ----------------------------------------------- |
 | number.nilan_temperature_target                | Temperature target                | 22.0 °C | Desired room temperature setpoint               |
 | number.nilan_temperature                       | Temperature                       | 1 °C    | Temperature offset/adjustment value             |
 | number.nilan_hotwater_temperature_target       | Hotwater Temperature target       | 52.0 °C | Desired hot water temperature                   |
@@ -73,8 +73,8 @@ Here's the complete entity reference for the LS Control ventilation/heat pump un
 
 ## Controls – Button
 
-| Entity ID                                            | Name         | Value      | Description                                                   |
-| ---------------------------------------------------- | ------------ | ---------- | ------------------------------------------------------------- |
+| Entity ID                 | Name         | Value      | Description                                                   |
+| ------------------------- | ------------ | ---------- | ------------------------------------------------------------- |
 | button.nilan_reset_filter | Reset filter | _(action)_ | Resets the filter change countdown after replacing the filter |
 
 ---
