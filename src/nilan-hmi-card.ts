@@ -83,6 +83,7 @@ export class NilanHmiCard extends LitElement {
   @state() private _controlsOpen = false;
   @state() private _designerPoints: Array<{ x: number; y: number; n: number }> = [];
   @state() private _designerOverrides: Partial<Record<SlotId, { x: number; y: number }>> = {};
+  @state() private _designerForced: Set<string> = new Set();
   private _dragOffset: { dx: number; dy: number } = { dx: 0, dy: 0 };
 
   public static async getConfigElement(): Promise<HTMLElement> {
@@ -336,7 +337,7 @@ export class NilanHmiCard extends LitElement {
     const ents = this._config!.entities ?? {};
     const entityId = ents.heating_element;
     if (this._slotHidden(id, entityId)) return nothing;
-    if (!isOn(this.hass, entityId)) return nothing;
+    if (!isOn(this.hass, entityId) && !this._isForced('element_bolt')) return nothing;
     const cfg = this._slotConfig(id);
     return this._slotBox(id, html`<ha-icon class="bolt" icon="mdi:lightning-bolt" title="el-supplement"></ha-icon>`, entityId, cfg);
   }
@@ -368,13 +369,45 @@ export class NilanHmiCard extends LitElement {
     `, entityId, cfg);
   }
 
+  private _isForced(key: string): boolean {
+    return !!this._config?.layout?.designer && this._designerForced.has(key);
+  }
+
+  private _toggleForced(key: string) {
+    const next = new Set(this._designerForced);
+    if (next.has(key)) next.delete(key); else next.add(key);
+    this._designerForced = next;
+  }
+
   private _renderDesignerOverlay() {
     const count = Object.keys(this._designerOverrides).length;
+    const toggles: Array<{ key: string; label: string }> = [
+      { key: 'op:compressor', label: 'compressor' },
+      { key: 'op:heat', label: 'heat' },
+      { key: 'op:cool', label: 'cool' },
+      { key: 'op:hotwater', label: 'hotwater' },
+      { key: 'op:defrost', label: 'defrost' },
+      { key: 'op:stop', label: 'stop' },
+      { key: 'op:user', label: 'user' },
+      { key: 'op:week', label: 'week' },
+      { key: 'op:element', label: 'element' },
+      { key: 'element_bolt', label: 'tank bolt' },
+    ];
     return html`
       <div class="designer-bar" @pointerdown=${(e: Event) => e.stopPropagation()}>
         <span class="designer-hint">drag any slot · ${count} moved</span>
         <button class="designer-btn" @click=${this._onDesignerExport}>Export coords</button>
         <button class="designer-btn" @click=${this._onDesignerReset}>Reset</button>
+      </div>
+      <div class="designer-preview" @pointerdown=${(e: Event) => e.stopPropagation()}>
+        <div class="designer-preview-title">Force ON (preview)</div>
+        ${toggles.map((t) => html`
+          <label class="designer-toggle">
+            <input type="checkbox" .checked=${this._designerForced.has(t.key)}
+              @change=${() => this._toggleForced(t.key)} />
+            <span>${t.label}</span>
+          </label>
+        `)}
       </div>
       ${this._designerPoints.map(
       () => html`<div class="designer-toast">copied to clipboard</div>`,
@@ -503,10 +536,12 @@ export class NilanHmiCard extends LitElement {
     } else {
       active = isOn(this.hass, entityId, onStates);
     }
+    if (this._isForced(`op:${iconId}`)) active = true;
 
     if (!active) return null;
     let src = OP_ICON_ASSETS[iconId];
-    if (iconId === 'hotwater' && isOn(this.hass, this._config?.entities?.heating_element)) {
+    const elOn = isOn(this.hass, this._config?.entities?.heating_element) || this._isForced('element_bolt');
+    if (iconId === 'hotwater' && elOn) {
       src = ICON_PRODUCE_BOLT;
     }
     return html`<img class="op-icon" src=${src} alt=${iconId} title=${iconId} />`;
@@ -1115,6 +1150,35 @@ export class NilanHmiCard extends LitElement {
     }
     .designer-btn:hover {
       background: #b71d23;
+    }
+    .designer-preview {
+      position: absolute;
+      top: 36px;
+      right: 4px;
+      z-index: 6;
+      background: rgba(0, 0, 0, 0.78);
+      color: #fff;
+      padding: 6px 8px;
+      border-radius: 6px;
+      font-size: 11px;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      max-width: 140px;
+    }
+    .designer-preview-title {
+      font-weight: 700;
+      opacity: 0.85;
+      margin-bottom: 2px;
+    }
+    .designer-toggle {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      cursor: pointer;
+    }
+    .designer-toggle input {
+      margin: 0;
     }
     .designer-toast {
       position: absolute;
