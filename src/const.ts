@@ -105,7 +105,7 @@ export const SLOT_COORDS: Record<SlotId, Coord> = {
     hotwater_bottom: { x: 20.8, y: 86.6, w: 14, h: 5 },
     evaporator: { x: 52.2, y: 84.1, w: 14, h: 5 },
     heatpump_outdoor: { x: 52.5, y: 88.8, w: 14, h: 5 },
-    element_bolt: { x: 22, y: 78, w: 6, h: 5 },
+    element_bolt: { x: 20.1, y: 79.1, w: 6, h: 5 },
     central_heat: { x: 23.4, y: 67.3, w: 14, h: 6 },
     filter_days: { x: 50, y: 95, w: 30, h: 4 },
 };
