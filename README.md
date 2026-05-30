@@ -45,7 +45,7 @@ Designed for users running the [Genvex Connect](https://github.com/superrob/genv
 
 In the dashboard, click **Add card → Custom: Nilan HMI Card**. Then in the visual editor:
 
-1. Pick your Genvex Connect device under **Auto-fill** — entities will be populated automatically.
+1. Open the **General** section and pick your Genvex Connect device under **Source device** — entities are populated automatically.
 2. Adjust slot visibility, labels, or behavior in the other sections.
 
 ### Minimal YAML
