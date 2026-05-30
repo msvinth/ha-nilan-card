@@ -2,6 +2,10 @@
 
 A Home Assistant Lovelace custom card that replicates the **Nilan CTS602 HMI** front screen, with live values for every slot on the panel.
 
+<p align="center">
+  <img src="img/screenshot.png" alt="Nilan HMI Card screenshot" width="380" />
+</p>
+
 Designed for users running the [Genvex Connect](https://github.com/genvex-connect/ha-genvex-connect) HACS integration on a Nilan Compact P (or similar Nilan/Genvex unit), but works with any entity set you wire up via the visual editor.
 
 > Note: This project is not affiliated with Nilan A/S. All trademarks belong to their respective owners.
