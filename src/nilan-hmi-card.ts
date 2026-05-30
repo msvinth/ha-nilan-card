@@ -193,7 +193,6 @@ export class NilanHmiCard extends LitElement {
           ${this._renderTempSlot('exhaust', ents.temperature_exhaust_air, 'slot.exhaust')}
           ${this._renderRoom()}
           ${this._renderTempSlot('supply', ents.temperature_supply_air, 'slot.supply')}
-          ${this._renderTempSlot('extract', ents.temperature_extract_air, 'slot.extract')}
           ${this._renderTempSlot('evaporator', ents.temperature_before_condenser, 'slot.evaporator')}
           ${this._renderTempSlot('heatpump_outdoor', ents.temperature_after_condenser, 'slot.heatpump_outdoor')}
           ${this._renderFanLevel()}
