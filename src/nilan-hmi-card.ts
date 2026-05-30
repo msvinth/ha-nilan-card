@@ -338,7 +338,7 @@ export class NilanHmiCard extends LitElement {
     if (this._slotHidden(id, entityId)) return nothing;
     if (!isOn(this.hass, entityId)) return nothing;
     const cfg = this._slotConfig(id);
-    return this._slotBox(id, html`<div class="bolt" title="el-supplement">⚡</div>`, entityId, cfg);
+    return this._slotBox(id, html`<ha-icon class="bolt" icon="mdi:lightning-bolt" title="el-supplement"></ha-icon>`, entityId, cfg);
   }
 
   private _renderFanLevel() {
@@ -1032,9 +1032,8 @@ export class NilanHmiCard extends LitElement {
     }
     .bolt {
       color: #fff;
-      font-size: clamp(14px, 2.5cqw, 22px);
-      font-weight: 900;
-      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+      --mdc-icon-size: clamp(14px, 3cqw, 26px);
+      filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.5));
     }
     .debug .slot {
       outline: 1px dashed rgba(211, 35, 42, 0.5);
