@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.3.0 - 2026-05-30
+
+- Card picker: render HMI background image as preview thumbnail in Home Assistant's "Add card" dialog.
+
 ## 0.2.0 - 2026-05-30
 
 - Operation icons: `cool` now driven by `heatpump_operation_state`; `hotwater` (produce) driven by `status`.
