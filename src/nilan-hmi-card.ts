@@ -27,6 +27,7 @@ import {
   ICON_DEFROST,
   ICON_HEAT,
   ICON_PRODUCE,
+  ICON_PRODUCE_BOLT,
   ICON_STOP,
   ICON_USER,
   ICON_WEEK,
@@ -504,7 +505,10 @@ export class NilanHmiCard extends LitElement {
     }
 
     if (!active) return null;
-    const src = OP_ICON_ASSETS[iconId];
+    let src = OP_ICON_ASSETS[iconId];
+    if (iconId === 'hotwater' && isOn(this.hass, this._config?.entities?.heating_element)) {
+      src = ICON_PRODUCE_BOLT;
+    }
     return html`<img class="op-icon" src=${src} alt=${iconId} title=${iconId} />`;
   }
 

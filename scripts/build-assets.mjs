@@ -22,6 +22,7 @@ const CONST_NAMES = {
     'defrost.png': 'ICON_DEFROST',
     'heat.png': 'ICON_HEAT',
     'produce.png': 'ICON_PRODUCE',
+    'produce_bolt.png': 'ICON_PRODUCE_BOLT',
     'stop.png': 'ICON_STOP',
     'user.png': 'ICON_USER',
     'week.png': 'ICON_WEEK',
