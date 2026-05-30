@@ -7,7 +7,6 @@
 - Hot-water tank: lightning-bolt overlay now uses `mdi:lightning-bolt` (~2x larger, centered between tank temps).
 - Temperature slots: replaced evaporator/outdoor with **before condenser** / **after condenser** (`temperature_before_condenser`, `temperature_after_condenser`).
 - Removed `extract` slot and the room target temperature reference (`→22°`).
-- Designer mode: new draggable preview panel with per-icon "Force ON" checkboxes (op-icons + tank bolt).
 - Default coord nudges: `element_bolt`, `extract`, `central_heat`.
 
 ## 0.1.0 - unreleased
