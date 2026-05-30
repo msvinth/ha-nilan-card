@@ -135,20 +135,8 @@ export class NilanHmiCardEditor extends LitElement {
             title: 'Layout',
             flatten: true,
             schema: [
-                { name: 'aspect_ratio', selector: { text: {} } },
                 { name: 'scale', selector: { number: { min: 0.5, max: 2, step: 0.1, mode: 'slider' } } },
-                { name: 'show_title', selector: { boolean: {} } },
-                { name: 'compact', selector: { boolean: {} } },
                 { name: 'show_legend', selector: { boolean: {} } },
-                {
-                    name: 'background_variant',
-                    selector: {
-                        select: {
-                            mode: 'dropdown',
-                            options: ['photo', 'light', 'dark', 'auto'].map((v) => ({ value: v, label: v })),
-                        },
-                    },
-                },
                 {
                     name: 'hide_slots',
                     selector: {
@@ -355,7 +343,6 @@ export class NilanHmiCardEditor extends LitElement {
     private _computeLabel = (schema: SchemaItem): string => {
         const map: Record<string, string> = {
             device_id: 'Source device (for auto-fill)',
-            aspect_ratio: 'Aspect ratio (e.g. 2/3)',
             scale: 'Overlay scale',
             hide_slots: 'Hide slots',
             controls_popup_enabled: 'Enable controls popup',
@@ -371,9 +358,6 @@ export class NilanHmiCardEditor extends LitElement {
         if (schema.name === 'device_id') {
             return 'Pick a Genvex Connect device, then click "Auto-fill entities".';
         }
-        if (schema.name === 'aspect_ratio') {
-            return 'CSS aspect-ratio for the card box. Default 2/3 matches the original HMI.';
-        }
         return undefined;
     };
 
@@ -382,12 +366,8 @@ export class NilanHmiCardEditor extends LitElement {
     private _flattenLayout(): Record<string, any> {
         const l = this._config?.layout ?? {};
         return {
-            aspect_ratio: l.aspect_ratio ?? '2/3',
             scale: l.scale ?? 1,
-            show_title: l.show_title ?? false,
-            compact: l.compact ?? false,
             show_legend: l.show_legend ?? false,
-            background_variant: l.background_variant ?? 'photo',
             hide_slots: l.hide_slots ?? [],
         };
     }
@@ -434,12 +414,8 @@ export class NilanHmiCardEditor extends LitElement {
             device_id: v.device_id || undefined,
             debug: v.debug || undefined,
             layout: this._cleanObj({
-                aspect_ratio: v.aspect_ratio,
                 scale: v.scale,
-                show_title: v.show_title,
-                compact: v.compact,
                 show_legend: v.show_legend,
-                background_variant: v.background_variant,
                 hide_slots: v.hide_slots,
                 coord_overrides: this._config.layout?.coord_overrides,
             }),

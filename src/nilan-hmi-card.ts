@@ -95,9 +95,6 @@ export class NilanHmiCard extends LitElement {
 
   public setConfig(config: NilanHmiCardConfig): void {
     if (!config) throw new Error('Invalid configuration');
-    if (config.layout?.aspect_ratio && !/^\d+\s*\/\s*\d+$/.test(config.layout.aspect_ratio)) {
-      throw new Error('layout.aspect_ratio must look like "2/3"');
-    }
     this._config = { ...config, entities: { ...(config.entities ?? {}) } };
   }
 
@@ -180,15 +177,13 @@ export class NilanHmiCard extends LitElement {
       `;
     }
 
-    const aspect = this._config.layout?.aspect_ratio ?? '2/3';
     const scale = this._config.layout?.scale ?? 1;
-    const showTitle = this._config.layout?.show_title && this._config.name;
 
     return html`
-      <ha-card class="root" .header=${showTitle ? this._config.name : undefined}>
+      <ha-card class="root" .header=${this._config.name || undefined}>
         <div
           class="stage ${classMap({ debug: !!this._config.debug, designer: !!this._config.layout?.designer })}"
-          style=${styleMap({ aspectRatio: aspect, '--nilan-scale': String(scale) })}
+          style=${styleMap({ aspectRatio: '2/3', '--nilan-scale': String(scale) })}
         >
           <img class="bg" src=${MAIN_BG} alt="" aria-hidden="true" />
           ${this._renderMenu()} ${this._renderAlarm()} ${this._renderOpIcons()}

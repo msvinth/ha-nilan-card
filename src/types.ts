@@ -52,12 +52,8 @@ export interface NilanHmiCardConfig {
     theme?: string;
 
     layout?: {
-        aspect_ratio?: string;
         scale?: number;
-        show_title?: boolean;
         show_house_outline?: boolean;
-        background_variant?: 'photo' | 'light' | 'dark' | 'auto';
-        compact?: boolean;
         show_legend?: boolean;
         designer?: boolean;
         hide_slots?: SlotId[];
