@@ -53,22 +53,22 @@ In the dashboard, click **Add card → Custom: Nilan HMI Card**. Then in the vis
 ```yaml
 type: custom:nilan-hmi-card
 entities:
-  temperature_room: sensor.98735005755_remote_lscontrol_dk_temperature_room
-  temperature_supply_air: sensor.987350057755_remote_lscontrol_dk_temperature_supply_air
-  temperature_outside_air: sensor.987350057755_remote_lscontrol_dk_temperature_outside_air
-  temperature_exhaust_air: sensor.987350057755_remote_lscontrol_dk_temperature_exhaust_air
-  humidity: sensor.98735005755_remote_lscontrol_dk_humidity
-  temperature_hotwater_top: sensor.987350057755_remote_lscontrol_dk_temperature_hotwater_top
-  fan_level_supply: sensor.987350057755_remote_lscontrol_dk_fan_level_supply
-  active_alarm_count: sensor.987350057755_remote_lscontrol_dk_active_alarm_count
-  active_alarm_list: sensor.987350057755_remote_lscontrol_dk_active_alarm_list
-  heatpump: binary_sensor.987350057755_remote_lscontrol_dk_heatpump
-  bypass: binary_sensor.987350057755_remote_lscontrol_dk_bypass
-  heating_element: binary_sensor.987350057755_remote_lscontrol_dk_heatpump_heating_element
-  climate: climate.987350057755_remote_lscontrol_dk_ventilation
-  temperature_target: number.987350057755_remote_lscontrol_dk_temperature_target
-  hotwater_temperature_target: number.987350057755_remote_lscontrol_dk_hotwater_temperature_target
-  fan_level: select.987350057755_remote_lscontrol_dk_fan_level
+  temperature_room: sensor.nilan_temperature_room
+  temperature_supply_air: sensor.nilan_temperature_supply_air
+  temperature_outside_air: sensor.nilan_temperature_outside_air
+  temperature_exhaust_air: sensor.nilan_temperature_exhaust_air
+  humidity: sensor.nilan_humidity
+  temperature_hotwater_top: sensor.nilan_temperature_hotwater_top
+  fan_level_supply: sensor.nilan_fan_level_supply
+  active_alarm_count: sensor.nilan_active_alarm_count
+  active_alarm_list: sensor.nilan_active_alarm_list
+  heatpump: binary_sensor.nilan_heatpump
+  bypass: binary_sensor.nilan_bypass
+  heating_element: binary_sensor.nilan_heatpump_heating_element
+  climate: climate.nilan_ventilation
+  temperature_target: number.nilan_temperature_target
+  hotwater_temperature_target: number.nilan_hotwater_temperature_target
+  fan_level: select.nilan_fan_level
 ```
 
 All options are exposed in the visual editor with inline labels and helpers — start there and only hand-edit YAML if you need something the UI doesn't cover.
