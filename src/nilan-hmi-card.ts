@@ -239,17 +239,14 @@ export class NilanHmiCard extends LitElement {
     const unit = cfg.unit ?? entityUnit(this.hass, entityId) ?? '°C';
     const value = formatStateValue(this.hass, ent, cfg.decimals ?? 1, cfg.attribute);
     const color = this._colorFor(cfg, entityNumber(this.hass, entityId));
-    const target = entityNumber(this.hass, ents.temperature_target);
     const showLabel = !!cfg.label || this._config?.layout?.show_legend;
     return this._slotBox(id, html`
       <div class="value temp" style=${styleMap(color ? { color } : {})}>
         <span class="num">${value}</span><span class="unit">${unit}</span>
       </div>
       ${showLabel
-        ? html`<div class="lbl">${cfg.label ?? this._txt('slot.room')}${target != null ? html` · →${target.toFixed(0)}°` : nothing}</div>`
-        : target != null
-          ? html`<div class="lbl tiny">→${target.toFixed(0)}°</div>`
-          : nothing}
+        ? html`<div class="lbl">${cfg.label ?? this._txt('slot.room')}</div>`
+        : nothing}
     `, entityId, cfg);
   }
 
