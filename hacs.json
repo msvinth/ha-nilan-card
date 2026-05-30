@@ -1,0 +1,6 @@
+{
+  "name": "Nilan HMI Card",
+  "render_readme": true,
+  "filename": "nilan-hmi-card.js",
+  "homeassistant": "2024.4.0"
+}

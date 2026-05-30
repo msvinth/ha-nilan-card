@@ -1,0 +1,85 @@
+# Nilan HMI Card
+
+A Home Assistant Lovelace custom card that replicates the **Nilan CTS602 HMI** front screen, with live values for every slot on the panel.
+
+Designed for users running the [Genvex Connect](https://github.com/genvex-connect/ha-genvex-connect) HACS integration on a Nilan Compact P (or similar Nilan/Genvex unit), but works with any entity set you wire up via the visual editor.
+
+> Note: This project is not affiliated with Nilan A/S. All trademarks belong to their respective owners.
+
+## Features
+
+- Photo-accurate background of the original Nilan HMI screen with live HA overlays.
+- All ~40 Genvex Connect entities supported as optional slots.
+- **Visual editor** with one-click "auto-fill from device" for any Genvex Connect device.
+- Tap any value to open the standard `more-info` dialog.
+- Tap the **menu icon** to open a controls popup (target temperature, hot-water target, fan level, antilegionella, cooling priority, ...).
+- Tap the **alarm icon** to see the active alarm list.
+- Operation-icon strip (compressor, heat, cool, hot-water, defrost, stop, user program, week program, el-supplement) driven by configurable state maps.
+- Per-slot overrides: label, unit, decimals, color, icon, thresholds, custom tap actions.
+- English and Danish localisation.
+- All assets bundled inside the JS file — install one file, done.
+
+## Installation
+
+### HACS (recommended)
+
+1. In HACS, open the menu and add a custom repository:
+   - URL: `https://github.com/msvinth/ha-nilan-card`
+   - Category: `Dashboard`
+2. Install **Nilan HMI Card**.
+3. Refresh the dashboard. The resource is registered automatically by HACS.
+
+[![Open your Home Assistant instance and open a repository inside HACS.](https://my.home-assistant.io/badges/hacs_repository.svg)](https://my.home-assistant.io/redirect/hacs_repository/?owner=msvinth&repository=ha-nilan-card&category=plugin)
+
+### Manual
+
+1. Download `nilan-hmi-card.js` from the [latest release](https://github.com/msvinth/ha-nilan-card/releases).
+2. Copy it to `<config>/www/`.
+3. Add a Lovelace resource: URL `/local/nilan-hmi-card.js`, type `module`.
+
+## Usage
+
+In the dashboard, click **Add card → Custom: Nilan HMI Card**. Then in the visual editor:
+
+1. Pick your Genvex Connect device under **Auto-fill** — entities will be populated automatically.
+2. Adjust slot visibility, labels, or behavior in the other sections.
+
+### Minimal YAML
+
+```yaml
+type: custom:nilan-hmi-card
+entities:
+  temperature_room: sensor.98735005755_remote_lscontrol_dk_temperature_room
+  temperature_supply_air: sensor.987350057755_remote_lscontrol_dk_temperature_supply_air
+  temperature_outside_air: sensor.987350057755_remote_lscontrol_dk_temperature_outside_air
+  temperature_exhaust_air: sensor.987350057755_remote_lscontrol_dk_temperature_exhaust_air
+  humidity: sensor.98735005755_remote_lscontrol_dk_humidity
+  temperature_hotwater_top: sensor.987350057755_remote_lscontrol_dk_temperature_hotwater_top
+  fan_level_supply: sensor.987350057755_remote_lscontrol_dk_fan_level_supply
+  active_alarm_count: sensor.987350057755_remote_lscontrol_dk_active_alarm_count
+  active_alarm_list: sensor.987350057755_remote_lscontrol_dk_active_alarm_list
+  heatpump: binary_sensor.987350057755_remote_lscontrol_dk_heatpump
+  bypass: binary_sensor.987350057755_remote_lscontrol_dk_bypass
+  heating_element: binary_sensor.987350057755_remote_lscontrol_dk_heatpump_heating_element
+  climate: climate.987350057755_remote_lscontrol_dk_ventilation
+  temperature_target: number.987350057755_remote_lscontrol_dk_temperature_target
+  hotwater_temperature_target: number.987350057755_remote_lscontrol_dk_hotwater_temperature_target
+  fan_level: select.987350057755_remote_lscontrol_dk_fan_level
+```
+
+See [docs/options.md](docs/options.md) for the full option reference (also rendered in the visual editor).
+
+## Development
+
+```sh
+npm install
+npm run dev     # rollup watch + dev server on :5000
+npm run build   # production bundle to dist/nilan-hmi-card.js
+npm run lint
+```
+
+To test against a real HA instance, register the dev server URL as a Lovelace resource: `http://<your-machine>:5000/nilan-hmi-card.js`.
+
+## License
+
+MIT — see [LICENSE](LICENSE).

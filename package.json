@@ -1,0 +1,49 @@
+{
+  "name": "nilan-hmi-card",
+  "version": "0.1.0",
+  "description": "Home Assistant Lovelace card that mimics the Nilan CTS602 HMI front panel.",
+  "type": "module",
+  "main": "dist/nilan-hmi-card.js",
+  "scripts": {
+    "prebuild": "node scripts/build-assets.mjs",
+    "build": "rollup -c",
+    "dev": "rollup -c -w",
+    "lint": "eslint \"src/**/*.ts\"",
+    "format": "prettier --write \"src/**/*.{ts,js,json}\"",
+    "typecheck": "tsc --noEmit"
+  },
+  "keywords": [
+    "home-assistant",
+    "lovelace",
+    "hacs",
+    "nilan",
+    "cts602",
+    "genvex",
+    "custom-card"
+  ],
+  "license": "MIT",
+  "author": "msvinth",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/msvinth/ha-nilan-card.git"
+  },
+  "devDependencies": {
+    "@rollup/plugin-json": "^6.1.0",
+    "@rollup/plugin-node-resolve": "^15.2.3",
+    "@rollup/plugin-typescript": "^11.1.6",
+    "@typescript-eslint/eslint-plugin": "^7.18.0",
+    "@typescript-eslint/parser": "^7.18.0",
+    "custom-card-helpers": "^1.9.0",
+    "eslint": "^8.57.0",
+    "eslint-config-prettier": "^9.1.0",
+    "home-assistant-js-websocket": "^9.4.0",
+    "lit": "^3.2.0",
+    "prettier": "^3.3.3",
+    "rollup": "^4.21.0",
+    "rollup-plugin-serve": "^3.0.0",
+    "@rollup/plugin-terser": "^0.4.4",
+    "sharp": "^0.33.5",
+    "tslib": "^2.7.0",
+    "typescript": "^5.5.4"
+  }
+}
