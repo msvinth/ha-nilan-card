@@ -52,7 +52,6 @@ export interface NilanHmiCardConfig {
     theme?: string;
 
     layout?: {
-        scale?: number;
         show_house_outline?: boolean;
         show_legend?: boolean;
         designer?: boolean;

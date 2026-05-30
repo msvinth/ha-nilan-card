@@ -135,7 +135,6 @@ export class NilanHmiCardEditor extends LitElement {
             title: 'Layout',
             flatten: true,
             schema: [
-                { name: 'scale', selector: { number: { min: 0.5, max: 2, step: 0.1, mode: 'slider' } } },
                 { name: 'show_legend', selector: { boolean: {} } },
                 {
                     name: 'hide_slots',
@@ -343,7 +342,6 @@ export class NilanHmiCardEditor extends LitElement {
     private _computeLabel = (schema: SchemaItem): string => {
         const map: Record<string, string> = {
             device_id: 'Source device (for auto-fill)',
-            scale: 'Overlay scale',
             hide_slots: 'Hide slots',
             controls_popup_enabled: 'Enable controls popup',
             controls_popup_title: 'Popup title',
@@ -366,7 +364,6 @@ export class NilanHmiCardEditor extends LitElement {
     private _flattenLayout(): Record<string, any> {
         const l = this._config?.layout ?? {};
         return {
-            scale: l.scale ?? 1,
             show_legend: l.show_legend ?? false,
             hide_slots: l.hide_slots ?? [],
         };
@@ -414,7 +411,6 @@ export class NilanHmiCardEditor extends LitElement {
             device_id: v.device_id || undefined,
             debug: v.debug || undefined,
             layout: this._cleanObj({
-                scale: v.scale,
                 show_legend: v.show_legend,
                 hide_slots: v.hide_slots,
                 coord_overrides: this._config.layout?.coord_overrides,

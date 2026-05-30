@@ -177,13 +177,11 @@ export class NilanHmiCard extends LitElement {
       `;
     }
 
-    const scale = this._config.layout?.scale ?? 1;
-
     return html`
       <ha-card class="root" .header=${this._config.name || undefined}>
         <div
           class="stage ${classMap({ debug: !!this._config.debug, designer: !!this._config.layout?.designer })}"
-          style=${styleMap({ aspectRatio: '2/3', '--nilan-scale': String(scale) })}
+          style=${styleMap({ aspectRatio: '2/3' })}
         >
           <img class="bg" src=${MAIN_BG} alt="" aria-hidden="true" />
           ${this._renderMenu()} ${this._renderAlarm()} ${this._renderOpIcons()}
