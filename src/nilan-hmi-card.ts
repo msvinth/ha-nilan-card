@@ -176,6 +176,9 @@ export class NilanHmiCard extends LitElement {
     if (!hasAny) {
       return html`
         <ha-card class="root">
+          <div class="stage preview" style=${styleMap({ aspectRatio: '2/3' })}>
+            <img class="bg" src=${MAIN_BG} alt="Nilan HMI preview" />
+          </div>
           <div class="msg unconfigured">${this._txt('card.unconfigured')}</div>
         </ha-card>
       `;
