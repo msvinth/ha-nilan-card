@@ -83,7 +83,9 @@ export class NilanHmiCard extends LitElement {
   @state() private _controlsOpen = false;
   @state() private _designerPoints: Array<{ x: number; y: number; n: number }> = [];
   @state() private _designerOverrides: Partial<Record<SlotId, { x: number; y: number }>> = {};
-  @state() private _designerForced: Set<string> = new Set();
+  @state() private _designerForced: Record<string, boolean> = {};
+  @state() private _designerPanelPos: { x: number; y: number } = { x: 4, y: 36 };
+  private _panelDrag: { dx: number; dy: number } | null = null;
   private _dragOffset: { dx: number; dy: number } = { dx: 0, dy: 0 };
 
   public static async getConfigElement(): Promise<HTMLElement> {
@@ -370,17 +372,41 @@ export class NilanHmiCard extends LitElement {
   }
 
   private _isForced(key: string): boolean {
-    return !!this._config?.layout?.designer && this._designerForced.has(key);
+    return !!this._config?.layout?.designer && !!this._designerForced[key];
   }
 
   private _toggleForced(key: string) {
-    const next = new Set(this._designerForced);
-    if (next.has(key)) next.delete(key); else next.add(key);
-    this._designerForced = next;
+    this._designerForced = { ...this._designerForced, [key]: !this._designerForced[key] };
+  }
+
+  private _onPanelDragStart(ev: PointerEvent) {
+    if ((ev.target as HTMLElement).tagName === 'INPUT' || (ev.target as HTMLElement).tagName === 'LABEL') return;
+    ev.preventDefault();
+    ev.stopPropagation();
+    const panel = ev.currentTarget as HTMLElement;
+    const rect = panel.getBoundingClientRect();
+    this._panelDrag = { dx: ev.clientX - rect.left, dy: ev.clientY - rect.top };
+    const move = (e: PointerEvent) => {
+      if (!this._panelDrag) return;
+      const stage = panel.parentElement!;
+      const sb = stage.getBoundingClientRect();
+      this._designerPanelPos = {
+        x: Math.max(0, Math.min(sb.width - 20, e.clientX - sb.left - this._panelDrag.dx)),
+        y: Math.max(0, Math.min(sb.height - 20, e.clientY - sb.top - this._panelDrag.dy)),
+      };
+    };
+    const up = () => {
+      this._panelDrag = null;
+      window.removeEventListener('pointermove', move);
+      window.removeEventListener('pointerup', up);
+    };
+    window.addEventListener('pointermove', move);
+    window.addEventListener('pointerup', up);
   }
 
   private _renderDesignerOverlay() {
     const count = Object.keys(this._designerOverrides).length;
+    const forcedCount = Object.values(this._designerForced).filter(Boolean).length;
     const toggles: Array<{ key: string; label: string }> = [
       { key: 'op:compressor', label: 'compressor' },
       { key: 'op:heat', label: 'heat' },
@@ -393,17 +419,19 @@ export class NilanHmiCard extends LitElement {
       { key: 'op:element', label: 'element' },
       { key: 'element_bolt', label: 'tank bolt' },
     ];
+    const panelStyle = `left:${this._designerPanelPos.x}px; top:${this._designerPanelPos.y}px; right:auto;`;
     return html`
       <div class="designer-bar" @pointerdown=${(e: Event) => e.stopPropagation()}>
-        <span class="designer-hint">drag any slot · ${count} moved</span>
+        <span class="designer-hint">drag any slot · ${count} moved · ${forcedCount} forced</span>
         <button class="designer-btn" @click=${this._onDesignerExport}>Export coords</button>
         <button class="designer-btn" @click=${this._onDesignerReset}>Reset</button>
       </div>
-      <div class="designer-preview" @pointerdown=${(e: Event) => e.stopPropagation()}>
-        <div class="designer-preview-title">Force ON (preview)</div>
+      <div class="designer-preview" style=${panelStyle}
+        @pointerdown=${(ev: PointerEvent) => this._onPanelDragStart(ev)}>
+        <div class="designer-preview-title">☰ Force ON (preview)</div>
         ${toggles.map((t) => html`
           <label class="designer-toggle">
-            <input type="checkbox" .checked=${this._designerForced.has(t.key)}
+            <input type="checkbox" .checked=${!!this._designerForced[t.key]}
               @change=${() => this._toggleForced(t.key)} />
             <span>${t.label}</span>
           </label>
@@ -1153,8 +1181,6 @@ export class NilanHmiCard extends LitElement {
     }
     .designer-preview {
       position: absolute;
-      top: 36px;
-      right: 4px;
       z-index: 6;
       background: rgba(0, 0, 0, 0.78);
       color: #fff;
@@ -1165,6 +1191,8 @@ export class NilanHmiCard extends LitElement {
       flex-direction: column;
       gap: 2px;
       max-width: 140px;
+      cursor: move;
+      user-select: none;
     }
     .designer-preview-title {
       font-weight: 700;
@@ -1179,6 +1207,7 @@ export class NilanHmiCard extends LitElement {
     }
     .designer-toggle input {
       margin: 0;
+      cursor: pointer;
     }
     .designer-toast {
       position: absolute;
