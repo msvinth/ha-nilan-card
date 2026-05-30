@@ -98,15 +98,15 @@ export const SLOT_COORDS: Record<SlotId, Coord> = {
     fan_level: { x: 56, y: 36.7, w: 10, h: 6 },
     room: { x: 30.6, y: 50.4, w: 16, h: 7 },
     supply: { x: 71.2, y: 49.7, w: 14, h: 5 },
-    extract: { x: 23.8, y: 60.4, w: 14, h: 5 },
+    extract: { x: 17.5, y: 59.3, w: 14, h: 5 },
     humidity: { x: 50.3, y: 67.4, w: 12, h: 5 },
     co2: { x: 72.2, y: 67.3, w: 14, h: 5 },
     hotwater: { x: 20.8, y: 75.5, w: 14, h: 6 },
     hotwater_bottom: { x: 20.8, y: 86.6, w: 14, h: 5 },
     evaporator: { x: 52.2, y: 84.1, w: 14, h: 5 },
     heatpump_outdoor: { x: 52.5, y: 88.8, w: 14, h: 5 },
-    element_bolt: { x: 20.1, y: 79.1, w: 6, h: 5 },
-    central_heat: { x: 23.4, y: 67.3, w: 14, h: 6 },
+    element_bolt: { x: 19.9, y: 80.3, w: 6, h: 5 },
+    central_heat: { x: 27.3, y: 66.6, w: 14, h: 6 },
     filter_days: { x: 50, y: 95, w: 30, h: 4 },
 };
 
