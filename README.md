@@ -12,7 +12,7 @@ Designed for users running the [Genvex Connect](https://github.com/superrob/genv
 
 ## Features
 
-- Photo-accurate background of the original Nilan HMI screen with live HA overlays.
+- Faithful SVG rendering of the original Nilan HMI screen with live HA overlays.
 - All ~40 Genvex Connect entities supported as optional slots.
 - **Visual editor** with one-click "auto-fill from device" for any Genvex Connect device.
 - Tap any value to open the standard `more-info` dialog.
