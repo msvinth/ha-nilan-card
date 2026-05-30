@@ -1095,7 +1095,7 @@ export class NilanHmiCard extends LitElement {
     }
     .bolt {
       color: #fff;
-      --mdc-icon-size: clamp(14px, 3cqw, 26px);
+      --mdc-icon-size: clamp(28px, 6cqw, 52px);
       filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.5));
     }
     .debug .slot {
