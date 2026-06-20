@@ -48,7 +48,9 @@ In the dashboard, click **Add card → Custom: Nilan HMI Card**. Then in the vis
 1. Open the **General** section and pick your Genvex Connect device under **Source device** — entities are populated automatically.
 2. Adjust slot visibility, labels, or behavior in the other sections.
 
-### Minimal YAML
+### Minimal YAML (advanced)
+
+Most users should stick with the visual editor above and pick their Genvex Connect device — it wires up every slot automatically. The YAML below is only an alternative for users who prefer hand-editing their dashboard or need to override individual entities.
 
 ```yaml
 type: custom:nilan-hmi-card

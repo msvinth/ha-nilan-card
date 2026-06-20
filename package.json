@@ -1,6 +1,6 @@
 {
   "name": "nilan-hmi-card",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "description": "Home Assistant Lovelace card that mimics the Nilan CTS602 HMI front panel.",
   "type": "module",
   "main": "dist/nilan-hmi-card.js",

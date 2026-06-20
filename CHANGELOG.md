@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.3.2 - 2026-06-20
+
+- Fix: `cool` icon now uses `status` entity with correct states (`state_8` "Cooling mode", `state_11` "Cooling + hot water") instead of `heatpump_operation_state` with wrong state codes.
+- Fix: `hotwater` (produce) icon states corrected to `state_9`, `state_11`, `state_17` (was incorrectly `state_2`, `state_3`).
+- Fix: default operation icon order changed to show `cool` before `compressor`, matching the real CTS602 HMI.
+- Docs: clarify that minimal YAML section is for advanced users; recommend visual editor.
+
 ## 0.3.1 - 2026-05-30
 
 - Compressor icon: default mapping now follows the CTS602 HMI — driven by `status` and hidden only when in standby/off (`state_0`, `state_1`, `state_4`, etc.).

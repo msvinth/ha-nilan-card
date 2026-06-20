@@ -122,9 +122,9 @@ export type OperationIconId =
     | 'element';
 
 export const DEFAULT_OP_ORDER: OperationIconId[] = [
+    'cool',
     'compressor',
     'heat',
-    'cool',
     'hotwater',
     'defrost',
     'stop',
